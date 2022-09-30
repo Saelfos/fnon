@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "273851528061",
+    "project_id": "founon-35f3f",
+    "storage_bucket": "founon-35f3f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273851528061:android:3381bab14a74b5ce5ed214",
+        "android_client_info": {
+          "package_name": "com.saelmaka.fnon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273851528061-gqaai9gierro98icatrhf0egd9lub1t7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeOjpp1g9ijz07LJLZOI96kOA0BsV0lso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273851528061-gqaai9gierro98icatrhf0egd9lub1t7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
