@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 
+import '../Firebase/Components/Constants.dart';
 import '../Firebase/Models/Cart_Model.dart';
 import '../main.dart';
 import 'Details_Screen.dart';
