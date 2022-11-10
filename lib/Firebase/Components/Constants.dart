@@ -33,7 +33,7 @@ LanguageController languageController = Get.put(LanguageController());
       statusBarIconBrightness:
       Brightness.dark ,
       systemNavigationBarColor:
-       Colors.white ,
+      Color.fromRGBO(237,245,255,1),
       systemNavigationBarIconBrightness:
      Brightness.dark ,
   );
@@ -44,7 +44,7 @@ LanguageController languageController = Get.put(LanguageController());
     statusBarIconBrightness:
      Brightness.light,
     systemNavigationBarColor:
-     Colors.grey.shade900,
+    Color.fromRGBO(63,72,79,1),
     systemNavigationBarIconBrightness:
      Brightness.light,
   );
@@ -62,5 +62,5 @@ scaffoldBackgroundColor: Colors.white,);
 
 
 
-int aplicationID=1;
+int aplicationID=2;
 

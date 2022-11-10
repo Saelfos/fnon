@@ -14,7 +14,7 @@ import 'package:get_storage/get_storage.dart';
 import '../Firebase/Models/Cart_Model.dart';
 import '../Firebase/Models/all_products_screen.dart';
 import '../main.dart';
-import 'Details_Screen.dart';
+import 'details_screen.dart';
 
 class Favorites extends StatelessWidget {
   Favorites({

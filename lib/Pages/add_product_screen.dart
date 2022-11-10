@@ -41,16 +41,13 @@ final UploadController uploadController=Get.put(UploadController());
           children: [
                   Obx(()=> uploadController.selectedImagePath.value==''? Padding(
                     padding: const EdgeInsets.only(top: 20.0),
-                    child: Container(
-                      height:130 ,
-                      width:130 ,
+                    child: SizedBox(
+                      height: size.height*0.1,
+                      width: size.width*0.8,
                       child: Center(
-                        child: FittedBox(
-                          fit: BoxFit.cover,
-                          child: Text(
-                              "Select Product Image".tr
-                         ,style: TextStyle(fontSize: 22), ),
-                        ),
+                        child: Text(
+                            "No product image".tr
+                         ,style: TextStyle(fontSize: 18), ),
                       ),
                     ),
                   ):
@@ -232,6 +229,8 @@ final UploadController uploadController=Get.put(UploadController());
                     padding: const EdgeInsets.only(top: 20),
 
                     child: RoundedButton(
+                      width: size.width*0.8,
+                      height: size.height*0.075,
                       icon: Icon(Icons.add),
                       color: Color.fromRGBO(222,167,0,1),
                       text: "Add Product".tr,secondColor: Colors.black,
@@ -254,6 +253,8 @@ final UploadController uploadController=Get.put(UploadController());
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: RoundedButton(
+                      width: size.width*0.8,
+                      height: size.height*0.075,
                       icon: Icon(Icons.photo_size_select_actual_outlined),
                       color: Color.fromRGBO(222,167,0,1),
                       text: "Select Image".tr,secondColor: Colors.black,

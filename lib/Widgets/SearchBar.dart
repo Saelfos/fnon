@@ -11,7 +11,7 @@ import 'package:get_storage/get_storage.dart';
 
 import '../Firebase/Components/Constants.dart';
 import '../Firebase/Models/all_products_screen.dart';
-import '../Pages/Details_Screen.dart';
+import '../Pages/details_screen.dart';
 import 'Dialog.dart';
 
 

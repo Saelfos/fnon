@@ -1,6 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fnon/Pages/Favorites_Screen.dart';
+import 'package:fnon/Pages/favorites_screen.dart';
 import 'package:fnon/Widgets/SearchBar.dart';
 import 'package:fnon/Widgets/Settings.dart';
 
@@ -28,22 +28,7 @@ class Navigation extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _Navigation extends State<Navigation> {
-
   int _selectedIndex = 0;
-  static List<Widget> _tabs = <Widget>[
-    HomeScreenBody(),
-    Sections(),
-    aplicationID==2?ClientOrderScreen():OrdersScreen(),
-    Favorites(),
-
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
 FoodController foodController =Get.put(FoodController());
@@ -58,9 +43,9 @@ FoodController foodController =Get.put(FoodController());
             scale: size.aspectRatio*3.4,
             child: Image(image: AssetImage('assets/logo.png'),)),
         elevation: 0,
-        backgroundColor:brightness == Brightness.light
-            ? Colors.white
-            : Colors.grey.shade900 ,
+        // backgroundColor:brightness == Brightness.light
+        //     ? Colors.white
+        //     : Colors.grey.shade900 ,
         actions: [
           IconButton(onPressed: (){
             showSearch(context: context, delegate: Search());
@@ -80,63 +65,43 @@ FoodController foodController =Get.put(FoodController());
               : Colors.white70 ,)
         ],
       ),
-      backgroundColor: brightness == Brightness.light
-          ? Colors.white
-          : Colors.grey.shade900,
-        body: Center(
-            child: PageTransitionSwitcher(
-          transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
-            return FadeThroughTransition(
-              fillColor: brightness == Brightness.light
-                  ? Colors.white
-                  : Colors.grey.shade900,
-              animation: primaryAnimation,
-              secondaryAnimation: secondaryAnimation,
-              child: child,
-            );
+      // backgroundColor: brightness == Brightness.light
+      //     ? Colors.white
+      //     : Colors.grey.shade900,
+        bottomNavigationBar: NavigationBar(
+
+          onDestinationSelected: (int index) {
+            setState(() {
+              _selectedIndex = index;
+            });
           },
-          child: _tabs[_selectedIndex],
-        )
+          selectedIndex: _selectedIndex,
+          destinations: const <Widget>[
+            NavigationDestination(
+              icon: Icon(Icons.home_rounded),
+              label: 'Home',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.apps_rounded),
+              label: 'Categories',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.edit_calendar_rounded),
+              label: 'Orders',
+            ),NavigationDestination(
+              icon: Icon(Icons.bookmark_border),
+              label: 'Favorites',
+            ),
+          ],
         ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: brightness == Brightness.light
-            ? Colors.white
-            : Colors.grey.shade900,
-        type: BottomNavigationBarType.fixed,
-        items:  <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: 'Home'.tr,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.apps_outlined),
-            activeIcon: Icon(Icons.apps),
-            label: 'Categories'.tr,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.wysiwyg_outlined),
-            activeIcon: Icon(Icons.wysiwyg),
-            label: 'Orders'.tr,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border_outlined),
-            activeIcon: Icon(Icons.favorite),
-            label: 'Favorites'.tr,
-          ),
+      body: <Widget>[
+        HomeScreenBody(),
+        Sections(),
+        aplicationID==2?ClientOrderScreen():OrdersScreen(),
+        Favorites(),
+      ]
+      [_selectedIndex],
 
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Color.fromRGBO(222,167,0,1),
-
-        selectedLabelStyle:
-            TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-        unselectedFontSize: 15,
-        unselectedItemColor: brightness == Brightness.light
-            ? Colors.grey.shade800
-            : Colors.white70,
-        onTap: _onItemTapped,
-      ),
     );
   }
 }

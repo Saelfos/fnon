@@ -11,8 +11,8 @@ import 'package:get_storage/get_storage.dart';
 import '../Firebase/Components/Constants.dart';
 import '../Firebase/Models/Cart_Model.dart';
 import '../main.dart';
-import 'Details_Screen.dart';
-import 'Favorites_Screen.dart';
+import 'details_screen.dart';
+import 'favorites_screen.dart';
 import 'add_order_screen.dart';
 
 class ShoppingCart extends StatelessWidget {

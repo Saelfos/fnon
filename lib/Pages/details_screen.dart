@@ -13,7 +13,7 @@ import 'package:get_storage/get_storage.dart';
 import '../Firebase/Components/Constants.dart';
 import '../Firebase/Models/all_products_screen.dart';
 import 'Account_Widgets/rounded_button.dart';
-import 'Favorites_Screen.dart';
+import 'favorites_screen.dart';
 
 var favAsMap=favoritesList.map((e) => e.toJson()).toList();
 String jsonFavString=jsonEncode(favAsMap);
@@ -62,21 +62,67 @@ Featured allProducts;
     var brightness = MediaQuery.of(context).platformBrightness;
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: brightness==Brightness.light?Colors.white:Colors.grey.shade900,
-appBar: AppBar(),
+      // backgroundColor: brightness==Brightness.light?Colors.white:Colors.grey.shade900,
+appBar: AppBar(
+  title: Text(id==333?allProducts.name:
+  id == 111 ? favoriteItem.name :
+  id == 222 ? shoppingCartItem.name :
+  id == 1 ?
+  featured.name
+      : id == 2
+      ? bestSellers.name
+      : id == 3
+      ? discount.name
+      : id == 4
+      ? newArrival.name
+      : categoryId == 1
+      ? skirts.name
+      : categoryId == 2 ? blouse.name :
+  categoryId==3?trousers.name:
+  categoryId==4?dress.name:
+  categoryId==5?longJacket.name:
+  categoryId==6?jacket.name:
+  categoryId==7?boots.name:
+  bags.name,
+
+  ),
+),
       body:ListView(
         children: [
           Stack(
             children: [
-              OpenContainer(
-                closedColor: brightness==Brightness.light?Colors.white70:Colors.grey.shade900,
-                openColor: brightness==Brightness.light?Colors.white70:Colors.grey.shade900,
-                middleColor:brightness==Brightness.light?Colors.white70:Colors.grey.shade900,
-                closedElevation: 0,
-                transitionType: ContainerTransitionType.fadeThrough,
-                closedBuilder: (BuildContext _, VoidCallback openContainer) {
-                  return InkWell(
-                    onTap: openContainer,
+              // OpenContainer(
+              //   closedColor: brightness==Brightness.light?Colors.white70:Colors.grey.shade900,
+              //   openColor: brightness==Brightness.light?Colors.white70:Colors.grey.shade900,
+              //   middleColor:brightness==Brightness.light?Colors.white70:Colors.grey.shade900,
+              //   closedElevation: 0,
+              //   transitionType: ContainerTransitionType.fadeThrough,
+              //   closedBuilder: (BuildContext _, VoidCallback openContainer) {
+              //     return
+                    InkWell(
+                    onTap: (){Get.to(PhotoViewPage(
+    image:id==111?favoriteItem.image:
+    id==222?shoppingCartItem.image:
+    id==333?allProducts.image:
+    id == 1?
+    featured.image
+        : id == 2
+    ? bestSellers.image
+        : id == 3
+    ? discount.image
+        : id == 4
+    ? newArrival.image
+        : categoryId == 1
+    ? skirts.image
+        :categoryId==2? blouse.image
+        :categoryId==3?trousers.image:
+    categoryId==4?dress.image:
+    categoryId==5?longJacket.image:
+    categoryId==6?jacket.image:
+    categoryId==7?
+    boots.image:
+    bags.image
+    ));},
                     child: CachedNetworkImage(
 height: size.height*0.78,
                       width: size.width,
@@ -103,34 +149,7 @@ height: size.height*0.78,
                       bags.image,
                       fit: BoxFit.cover,
                     ),
-                  );
-                }, openBuilder: (BuildContext context, void Function({Object returnValue}) action) {
-                return PhotoViewPage(
-                    image:id==111?favoriteItem.image:
-                    id==222?shoppingCartItem.image:
-                    id==333?allProducts.image:
-                    id == 1?
-                    featured.image
-                        : id == 2
-                        ? bestSellers.image
-                        : id == 3
-                        ? discount.image
-                        : id == 4
-                        ? newArrival.image
-                        : categoryId == 1
-                        ? skirts.image
-                        :categoryId==2? blouse.image
-                        :categoryId==3?trousers.image:
-                    categoryId==4?dress.image:
-                    categoryId==5?longJacket.image:
-                    categoryId==6?jacket.image:
-                    categoryId==7?
-                    boots.image:
-                    bags.image
-                );
-
-              },
-              ),
+                  ),
 Positioned(
   bottom: 10,
   width: size.width,

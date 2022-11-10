@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
 import '../Firebase/Models/all_products_screen.dart';
-import '../Pages/Favorites_Screen.dart';
+import '../Pages/favorites_screen.dart';
 import '../Pages/shopping_cart_screen.dart';
 
 class PhotoViewPage extends StatelessWidget {
