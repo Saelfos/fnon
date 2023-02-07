@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:animations/animations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 
 import 'package:get/get.dart';
@@ -13,8 +13,8 @@ import 'package:get_storage/get_storage.dart';
 
 import '../Firebase/Models/Cart_Model.dart';
 import '../Firebase/Models/all_products_screen.dart';
-import '../main.dart';
-import 'details_screen.dart';
+
+import 'Details_Screen.dart';
 
 class Favorites extends StatelessWidget {
   Favorites({
@@ -73,7 +73,7 @@ class CartItemWidget extends StatelessWidget {
   CartItemWidget({Key key, this.index,this.featured}) : super(key: key);
    Featured featured;
 CartItem cartItem;
-  var _tapPosition;
+
 
 int index;
   @override
@@ -89,40 +89,12 @@ int index;
         return Padding(
             padding: const EdgeInsets.only(left: 14, right: 10),
             child: InkWell(
-              onTapDown: _storePosition,
               onLongPress: (){
-                  _showPop() async {
-                    final RenderBox overlay = Overlay
-                        .of(context)
-                        .context
-                        .findRenderObject();
-                    await showMenu(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(17))
-                        ),
-                        context: context,
-                        position: RelativeRect.fromRect(
-                            _tapPosition&Size(40, 40),
-                            Offset.zero&overlay.size),
-                        items: [
-                          PopupMenuItem(
-                              padding: EdgeInsets.all(8),
-                              height: 35,
-                              onTap: () {
-                                favoritesList.remove(favoritesList[index]);
+                favoritesList.remove(favoritesList[index]);
 
-                                var favAsMap=favoritesList.map((e) => e.toJson()).toList();
-                                String jsonFavString=jsonEncode(favAsMap);
-                                GetStorage().write('fav', jsonFavString);
-                              },
-                              child: Row(children: [
-                                Icon(Icons.remove_circle_outline_rounded),
-                                Text("Remove Item".tr),
-
-                              ]))
-                        ]);
-                  }
-                  _showPop();
+                var favAsMap=favoritesList.map((e) => e.toJson()).toList();
+                String jsonFavString=jsonEncode(favAsMap);
+                GetStorage().write('fav', jsonFavString);
               },
               onTap: openContainer,
               child: GridTile(
@@ -161,7 +133,7 @@ int index;
                         padding: EdgeInsets.all(2.0),
                       ),
                       Text(
-                        favoritesList[index].price.toString()+'  SP',
+                        favoritesList[index].price.toString()+'  EGP',
                         style: TextStyle(
                             color: brightness == Brightness.light
                                 ? Colors.black54
@@ -174,20 +146,15 @@ int index;
               ),
             ));
       },
-
       openBuilder: (BuildContext _, VoidCallback __) {
         return Details(
 id: 111,
-          favoriteItem:favoritesList[index],
+        favoriteItem: favoritesList[index],
         );
       },
 
     );
-
   }
-
-  void _storePosition(TapDownDetails details){
-    _tapPosition=details.globalPosition;}
 }
 
 

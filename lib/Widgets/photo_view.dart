@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
 import '../Firebase/Models/all_products_screen.dart';
-import '../Pages/favorites_screen.dart';
+import '../Pages/Favorites_Screen.dart';
 import '../Pages/shopping_cart_screen.dart';
 
 class PhotoViewPage extends StatelessWidget {
@@ -21,12 +21,11 @@ class PhotoViewPage extends StatelessWidget {
   String image;
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return PhotoView(
 
       imageProvider: CachedNetworkImageProvider(image),
-      minScale:(size.height*0.0006),
-      maxScale: (size.height*0.0009),
+      minScale:(0.4),
+      maxScale: (0.6),
     );
   }
 }

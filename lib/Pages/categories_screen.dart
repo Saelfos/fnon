@@ -1,10 +1,13 @@
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import 'header_and_body_screen.dart';
 
 
 
 class Sections extends StatelessWidget {
-  const Sections({
+  Sections({
     Key key,
   }) : super(key: key);
 
@@ -13,15 +16,15 @@ class Sections extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return ListView(
       shrinkWrap: true,
-      // physics: BouncingScrollPhysics(),
+      physics: BouncingScrollPhysics(),
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image(
-                fit: BoxFit.cover,
-                height: size.height*0.18,
+                fit: BoxFit.fill,
+                height: size.height*0.19,
                 image: AssetImage('assets/main2.jpg')),
           ),
         ),

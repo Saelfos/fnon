@@ -43,7 +43,7 @@ class FoodController extends GetxController {
   RxList<TurkishProducts> turkishProducts = RxList<TurkishProducts>([]);
   RxList<TimeLess> timeLess = RxList<TimeLess>([]);
   RxList<OrdersModel> orders = RxList<OrdersModel>([]);
-  RxList<ClientOrderModel> singleOrder = RxList<ClientOrderModel>([]);
+  RxList<ClientOrderModel> orderList = RxList<ClientOrderModel>([]);
   // Rx<ClientOrderModel> myOrderModel = ClientOrderModel().obs;
 
   String collection = "Products";
@@ -87,9 +87,8 @@ class FoodController extends GetxController {
     timeLess.bindStream(getTimeLess());
     orders.bindStream(getOrders());
 allProducts.bindStream(getAllProducts());
-    singleOrder.bindStream(getOneOrder());
 // myOrderModel.bindStream(getOneOrder());
-
+orderList.bindStream(getOneOrder());
     // print(foodController.mealsModel.value.id);
   }
 

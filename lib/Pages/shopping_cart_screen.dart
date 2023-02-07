@@ -8,11 +8,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 
-import '../Firebase/Components/Constants.dart';
 import '../Firebase/Models/Cart_Model.dart';
 import '../main.dart';
-import 'details_screen.dart';
-import 'favorites_screen.dart';
+import 'Details_Screen.dart';
+import 'Favorites_Screen.dart';
 import 'add_order_screen.dart';
 
 class ShoppingCart extends StatelessWidget {
@@ -74,7 +73,7 @@ class ShoppingCart extends StatelessWidget {
 
 class ShoppingCartWidget extends StatelessWidget {
   ShoppingCartWidget({Key key, this.index,}) : super(key: key);
-  var _tapPosition;
+
   CartItem cartItem;
   int index;
   @override
@@ -90,40 +89,12 @@ class ShoppingCartWidget extends StatelessWidget {
         return Padding(
             padding: const EdgeInsets.only(left: 14, right: 10),
             child: InkWell(
-              onTapDown: _storePosition,
 onLongPress: (){
-  _showPop() async {
-    final RenderBox overlay = Overlay
-        .of(context)
-        .context
-        .findRenderObject();
-    await showMenu(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(17))
-        ),
-        context: context,
-        position: RelativeRect.fromRect(
-            _tapPosition&Size(40, 40),
-            Offset.zero&overlay.size),
-        items: [
-          PopupMenuItem(
-              padding: EdgeInsets.all(8),
-              height: 35,
-              onTap: () {
-                shoppingCartList.remove(shoppingCartList[index]);
+  shoppingCartList.remove(shoppingCartList[index]);
 
-                var shopCartAsMap=shoppingCartList.map((e) => e.toJson()).toList();
-                String jsonShopCartString=jsonEncode(shopCartAsMap);
-                GetStorage().write('shop', jsonShopCartString);
-              },
-              child: Row(children: [
-                Icon(Icons.remove_circle_outline_rounded),
-                Text("Remove Item".tr),
-
-              ]))
-        ]);
-  }
-  _showPop();
+  var shopCartAsMap=shoppingCartList.map((e) => e.toJson()).toList();
+  String jsonShopCartString=jsonEncode(shopCartAsMap);
+ GetStorage().write('shop', jsonShopCartString);
 
 },
               onTap: openContainer,
@@ -162,7 +133,7 @@ onLongPress: (){
                         padding: EdgeInsets.all(2.0),
                       ),
                       Text(
-                        shoppingCartList[index].price.toString()+'  SP',
+                        shoppingCartList[index].price.toString()+'  EGP',
                         style: TextStyle(
                             color: brightness == Brightness.light
                                 ? Colors.black54
@@ -183,10 +154,7 @@ onLongPress: (){
       },
 
     );
-
   }
-  void _storePosition(TapDownDetails details){
-    _tapPosition=details.globalPosition;}
 }
 
 

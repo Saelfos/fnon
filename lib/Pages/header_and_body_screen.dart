@@ -10,7 +10,7 @@ import 'package:get_storage/get_storage.dart';
 import 'dart:ui';
 import '../Firebase/Components/Constants.dart';
 import 'all_products_screen.dart';
-import 'details_screen.dart';
+import 'Details_Screen.dart';
 
 class HomeScreenBody extends StatelessWidget {
   HomeScreenBody({
@@ -22,7 +22,7 @@ class HomeScreenBody extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return ListView(
       shrinkWrap: true,
-      // physics: BouncingScrollPhysics(),
+      physics: BouncingScrollPhysics(),
       children: [
 
         Padding(
@@ -30,8 +30,8 @@ class HomeScreenBody extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image(
-fit: BoxFit.cover,
-              height: size.height*0.18,
+fit: BoxFit.fill,
+              height: size.height*0.19,
                 image: AssetImage('assets/main3.jpg')),
           ),
         ),
@@ -60,13 +60,15 @@ final int categoryId;
     var brightness = MediaQuery.of(context).platformBrightness;
     Size size = MediaQuery.of(context).size;
     return Container(
-      height:size.height*0.32,
+      color:
+        brightness == Brightness.light ? Colors.white: Colors.grey.shade900,
+      height:size.height*0.34,
       child: Obx(
         () => GridView.builder(
           shrinkWrap: false,
           gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1,childAspectRatio: 1.4,mainAxisExtent:size.width*0.31),
-          // physics: BouncingScrollPhysics(),
+              crossAxisCount: 1,childAspectRatio: 1.2,mainAxisExtent:size.width*0.35),
+          physics: BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
           itemCount: id == 1
               ? foodController.featured.length
@@ -85,36 +87,20 @@ final int categoryId;
           categoryId==7?foodController.boots.length:
           foodController.bags.length,
           itemBuilder: (context, index) {
+            return OpenContainer(
+              closedColor: brightness == Brightness.light
+                  ? Colors.white
+                  : Colors.grey.shade900,
+              openColor: brightness == Brightness.light
+                  ? Colors.white
+                  : Colors.grey.shade900,
+              middleColor: Colors.transparent,
+              closedElevation: 0,
+              transitionType: ContainerTransitionType.fadeThrough,
+              closedBuilder: (BuildContext _, VoidCallback openContainer) {
                 return InkWell(
                   //ONTap
-                  onTap:(){Get.to(Details(
-                    index: index,
-                    featured: id == 1 ? foodController.featured[index] : null,
-                    bestSellers:
-                    id == 2 ? foodController.bestSellers[index] : null,
-                    discount: id == 3 ? foodController.discount[index] : null,
-                    newArrival: id == 4 ? foodController.newArrival[index] : null,
-                    skirts: categoryId==1?foodController.skirts[index]:null,
-                    blouse: categoryId==2?foodController.blouse[index]:null,
-                    trousers: categoryId==3?foodController.trousers[index]:null,
-                    dress: categoryId==4?foodController.dress[index]:null,
-                    longJacket: categoryId==5?foodController.longJacket[index]:null,
-                    jacket: categoryId==6?foodController.jacket[index]:null,
-                    boots: categoryId==7?foodController.boots[index]:null,
-                    bags: categoryId==8?foodController.bags[index]:null,
-
-                    //ID
-                    id: id == 1
-                        ? 1
-                        : id == 2
-                        ? 2
-                        : id == 3
-                        ? 3
-                        :id== 4?4:null,
-                    categoryId:categoryId==1?1:categoryId==2?2:categoryId==3?3:
-                    categoryId==4?4:categoryId==5?5:categoryId==6?6:categoryId==7?7:categoryId==8?8:null,
-
-                  ));},
+                  onTap: openContainer,
                   onTapDown: _storePosition,
                   //OnLongPress
                   onLongPress: () {
@@ -185,7 +171,7 @@ final int categoryId;
                                  '${foodController.bags[index].image}',
                                   fit: BoxFit.cover,
                                   width:MediaQuery.of(context).size.width * 0.32,
-                                  height: MediaQuery.of(context).size.height*0.22,
+                                  height: MediaQuery.of(context).size.height*0.23,
                                 ),
                               ),
                               Padding(
@@ -261,9 +247,41 @@ final int categoryId;
                   ),
                 );
               },
-            )
-            ),
-      );
+              openBuilder: (BuildContext _, VoidCallback __) {
+                return Details(
+                    index: index,
+                    featured: id == 1 ? foodController.featured[index] : null,
+                    bestSellers:
+                        id == 2 ? foodController.bestSellers[index] : null,
+                    discount: id == 3 ? foodController.discount[index] : null,
+                    newArrival: id == 4 ? foodController.newArrival[index] : null,
+                    skirts: categoryId==1?foodController.skirts[index]:null,
+                    blouse: categoryId==2?foodController.blouse[index]:null,
+                  trousers: categoryId==3?foodController.trousers[index]:null,
+                  dress: categoryId==4?foodController.dress[index]:null,
+                  longJacket: categoryId==5?foodController.longJacket[index]:null,
+                  jacket: categoryId==6?foodController.jacket[index]:null,
+                  boots: categoryId==7?foodController.boots[index]:null,
+                  bags: categoryId==8?foodController.bags[index]:null,
+
+                    //ID
+                    id: id == 1
+                        ? 1
+                        : id == 2
+                            ? 2
+                            : id == 3
+                                ? 3
+                                :id== 4?4:null,
+                  categoryId:categoryId==1?1:categoryId==2?2:categoryId==3?3:
+                  categoryId==4?4:categoryId==5?5:categoryId==6?6:categoryId==7?7:categoryId==8?8:null,
+
+              );
+              },
+            );
+          },
+        ),
+      ),
+    );
   }
 
   void _storePosition(TapDownDetails details){
@@ -283,33 +301,21 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     var brightness = MediaQuery.of(context).platformBrightness;
     Size size = MediaQuery.of(context).size;
-    // return
-    //   OpenContainer(
-    //     closedColor: brightness == Brightness.light
-    //         ? Colors.white
-    //         : Colors.grey.shade900,
-    //     middleColor: brightness == Brightness.light
-    //         ? Colors.white
-    //         : Colors.grey.shade900,
-    //     openColor: brightness == Brightness.light
-    //         ? Colors.white
-    //         : Colors.grey.shade900,
-    //     closedElevation: 0,
-    //     transitionType: ContainerTransitionType.fadeThrough,
-    //     closedBuilder: (BuildContext _, VoidCallback openContainer) {
+    return OpenContainer(
+        closedColor: brightness == Brightness.light
+            ? Colors.white
+            : Colors.grey.shade900,
+        middleColor: brightness == Brightness.light
+            ? Colors.white
+            : Colors.grey.shade900,
+        openColor: brightness == Brightness.light
+            ? Colors.white
+            : Colors.grey.shade900,
+        closedElevation: 0,
+        transitionType: ContainerTransitionType.fadeThrough,
+        closedBuilder: (BuildContext _, VoidCallback openContainer) {
           return InkWell(
-            onTap:(){ Get.to(ViewAllScreen(
-                id: id == 1
-                    ? 1
-                    : id == 2
-                    ? 2
-                    : id == 3
-                    ? 3:id==4? 4:null,
-                categoryId:categoryId==1?1
-                    :categoryId==2?2:categoryId==3?3:categoryId==4?4:
-                categoryId==5?5:categoryId==6?6:categoryId==7?7:categoryId==8?8:null));
-
-            },
+            onTap: openContainer,
             child: ListTile(
               //Title
               title: Text(
@@ -354,18 +360,19 @@ class Header extends StatelessWidget {
                   : Colors.white,size: 26,),
             ),
           );
-        }}
-        // openBuilder: (BuildContext _, VoidCallback __) {
-        //    return ViewAllScreen(
-        //          id: id == 1
-        //              ? 1
-        //              : id == 2
-        //                  ? 2
-        //                  : id == 3
-        //                      ? 3:id==4? 4:null,
-        //              categoryId:categoryId==1?1
-        //    :categoryId==2?2:categoryId==3?3:categoryId==4?4:
-        //              categoryId==5?5:categoryId==6?6:categoryId==7?7:categoryId==8?8:null);
-        //
-        // });
+        },
+        openBuilder: (BuildContext _, VoidCallback __) {
+           return ViewAllScreen(
+                 id: id == 1
+                     ? 1
+                     : id == 2
+                         ? 2
+                         : id == 3
+                             ? 3:id==4? 4:null,
+                     categoryId:categoryId==1?1
+           :categoryId==2?2:categoryId==3?3:categoryId==4?4:
+                     categoryId==5?5:categoryId==6?6:categoryId==7?7:categoryId==8?8:null);
 
+        });
+  }
+}

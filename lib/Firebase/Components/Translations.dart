@@ -77,7 +77,7 @@ class Translation extends Translations{
     'ar_SY': {
       'Cancel Order':'إلغاء الطلب',
       'Refresh':'تحديث',
-      'Order Not Showing ?':'لم يظهر الطلب ؟',
+      'Order Not Showing ?':'لم يظهر طلبك ؟',
       'Add product':'إضافة منتج',
       'About application':'حول التطبيق',
       "Send Order":'إرسال الطلب',

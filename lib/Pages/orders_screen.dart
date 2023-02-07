@@ -65,7 +65,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
                       closedBuilder: (BuildContext _, VoidCallback openContainer) {
                     return
                       ListTile(
-                        visualDensity: VisualDensity(vertical: 4),
 leading: IconButton(
   icon:Icon(Icons.delete_outline_outlined,color:brightness==Brightness.light? Colors.black:Colors.white,),
   onPressed: (){
@@ -105,10 +104,8 @@ leading: IconButton(
 
 
 },),
-                        title: Text(foodController.orders[index].clientName,style:
-                        TextStyle(fontSize: 18),overflow: TextOverflow.ellipsis,),
-                        subtitle: Text(foodController.orders[index].phoneNumber.toString(),style:
-                        TextStyle(fontSize: 15),overflow: TextOverflow.ellipsis,),
+                        title: Text(foodController.orders[index].clientName),
+                        subtitle: Text(foodController.orders[index].phoneNumber.toString()),
                         trailing: Text('#${(index+1)}'),
                       );
                     },
